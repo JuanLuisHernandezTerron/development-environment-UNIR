@@ -25,13 +25,14 @@ RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     ln -sf /usr/bin/pip3 /usr/bin/pip
 
 RUN git clone https://github.com/JuanLuisHernandezTerron/reto_final_python_unir.git \
+    && git clone https://github.com/JuanLuisHernandezTerron/development-environment-UNIR.git \
     && cd reto_final_python_unir \
     && git checkout main \
     && pip install --no-cache-dir -r requirements.txt 
 
+#LE DAMOS PERMISOS DE EJECUCION AL FICHERO
+RUN chmod +x /development-environment-UNIR/start.sh
+
 WORKDIR /reto_final_python_unir
 
-COPY start.sh /start.sh
-#LE DAMOS PERMISOS DE EJECUCION AL FICHERO
-RUN chmod +x /start.sh 
-CMD ["/start.sh"]
+CMD ["/development-environment-UNIR/start.sh"]
